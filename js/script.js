@@ -1,5 +1,7 @@
 const canvas = document.querySelector("canvas");
 const toolBtns = document.querySelectorAll(".tool");
+const fillColor = document.querySelector("#fill-color");
+console.log(fillColor);
 
 let contex = canvas.getContext("2d");
 let isDrawing = false;
@@ -20,12 +22,19 @@ const startDraw = (e) => {
 };
 const drawRectangle = (e) => {
   if (!isDrawing) return;
-  contex.strokeRect(
-    e.offsetX,
-    e.offsetY,
-    previousMouseX - e.offsetX,
-    previousMouseY - e.offsetY
-  );
+  fillColor.checked
+    ? contex.fillRect(
+        e.offsetX,
+        e.offsetY,
+        previousMouseX - e.offsetX,
+        previousMouseY - e.offsetY
+      )
+    : contex.strokeRect(
+        e.offsetX,
+        e.offsetY,
+        previousMouseX - e.offsetX,
+        previousMouseY - e.offsetY
+      );
 };
 const drawing = (e) => {
   if (!isDrawing) return;
