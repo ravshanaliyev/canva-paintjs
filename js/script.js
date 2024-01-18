@@ -4,6 +4,7 @@ const fillColor = document.querySelector("#fill-color");
 const sizeSlider = document.querySelector("#size-slider");
 const colorBtns = document.querySelectorAll(".colors .option");
 const colorPicker = document.querySelector("#color-picker");
+const clearCanvas = document.querySelector(".clear-canvas");
 let contex = canvas.getContext("2d");
 let selectedColor = "#000";
 let isDrawing = false;
@@ -107,6 +108,9 @@ colorBtns.forEach((btn) => {
 colorPicker.addEventListener("change", () => {
   colorPicker.parentElement.style.background = colorPicker.value;
   colorPicker.parentElement.click();
+});
+clearCanvas.addEventListener("click", () => {
+  contex.clearRect(0, 0, canvas.width, canvas.height);
 });
 sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
 canvas.addEventListener("mousedown", startDraw);
