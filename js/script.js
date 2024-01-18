@@ -1,8 +1,7 @@
 const canvas = document.querySelector("canvas");
 const toolBtns = document.querySelectorAll(".tool");
 const fillColor = document.querySelector("#fill-color");
-console.log(fillColor);
-
+const sizeSlider = document.querySelector("#size-slider");
 let contex = canvas.getContext("2d");
 let isDrawing = false;
 let brushWidth = 5;
@@ -79,6 +78,7 @@ toolBtns.forEach((btn) => {
     selectedTool = btn.id;
   });
 });
+sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mouseup", () => (isDrawing = false));
 canvas.addEventListener("mousemove", drawing);
