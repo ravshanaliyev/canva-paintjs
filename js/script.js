@@ -2,7 +2,10 @@ const canvas = document.querySelector("canvas");
 const toolBtns = document.querySelectorAll(".tool");
 const fillColor = document.querySelector("#fill-color");
 const sizeSlider = document.querySelector("#size-slider");
+const colorBtns = document.querySelectorAll(".colors .option");
+const colorPicker = document.querySelector("#color-picker");
 let contex = canvas.getContext("2d");
+let selectedColor = "#000";
 let isDrawing = false;
 let brushWidth = 5;
 let selectedTool = "brush";
@@ -18,6 +21,8 @@ const startDraw = (e) => {
   contex.beginPath();
   contex.lineWidth = brushWidth;
   snapshot = contex.getImageData(0, 0, canvas.width, canvas.height);
+  contex.strokeStyle = selectedColor;
+  contex.fillStyle = selectedColor;
 };
 const drawRectangle = (e) => {
   if (!isDrawing) return;
@@ -77,6 +82,23 @@ toolBtns.forEach((btn) => {
     btn.classList.add("active");
     selectedTool = btn.id;
   });
+});
+colorBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector(".options .selected").classList.remove("selected");
+    btn.classList.add("selected");
+    const bgColor = window
+      .getComputedStyle(btn)
+      .getPropertyValue("background-color");
+
+    selectedColor = bgColor;
+    contex.strokeStyle = btn.classList[0];
+    contex.fillStyle = btn.classList[0];
+  });
+});
+colorPicker.addEventListener("change", () => {
+  colorPicker.parentElement.style.background = colorPicker.value;
+  colorPicker.parentElement.click();
 });
 sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
 canvas.addEventListener("mousedown", startDraw);
