@@ -5,6 +5,7 @@ const sizeSlider = document.querySelector("#size-slider");
 const colorBtns = document.querySelectorAll(".colors .option");
 const colorPicker = document.querySelector("#color-picker");
 const clearCanvas = document.querySelector(".clear-canvas");
+const saveImg = document.querySelector(".save-img");
 let contex = canvas.getContext("2d");
 let selectedColor = "#000";
 let isDrawing = false;
@@ -111,6 +112,12 @@ colorPicker.addEventListener("change", () => {
 });
 clearCanvas.addEventListener("click", () => {
   contex.clearRect(0, 0, canvas.width, canvas.height);
+});
+saveImg.addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.download = `Canva-Paint-${Date.now()}.jpg`;
+  link.href = canvas.toDataURL();
+  link.click();
 });
 sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
 canvas.addEventListener("mousedown", startDraw);
