@@ -60,6 +60,7 @@ const drawTriangle = (e) => {
 const drawing = (e) => {
   if (!isDrawing) return;
   contex.putImageData(snapshot, 0, 0);
+
   switch (selectedTool) {
     case "brush":
       contex.lineTo(e.offsetX, e.offsetY);
@@ -73,6 +74,13 @@ const drawing = (e) => {
       break;
     case "triangle":
       drawTriangle(e);
+      break;
+    case "eraser":
+      contex.strokeStyle = "#fff";
+      contex.lineTo(e.offsetX, e.offsetY);
+      contex.stroke();
+      break;
+    default:
       break;
   }
 };
