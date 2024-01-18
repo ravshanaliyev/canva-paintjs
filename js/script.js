@@ -12,9 +12,15 @@ let isDrawing = false;
 let brushWidth = 5;
 let selectedTool = "brush";
 let previousMouseX, previousMouseY, snapshot;
+const setCanvasBackground = () => {
+  contex.fillStyle = "#fff";
+  contex.fillRect(0, 0, canvas.width, canvas.height);
+  contex.fillStyle = selectedColor;
+};
 window.addEventListener("load", () => {
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
+  setCanvasBackground();
 });
 const startDraw = (e) => {
   isDrawing = true;
@@ -112,6 +118,7 @@ colorPicker.addEventListener("change", () => {
 });
 clearCanvas.addEventListener("click", () => {
   contex.clearRect(0, 0, canvas.width, canvas.height);
+  setCanvasBackground();
 });
 saveImg.addEventListener("click", () => {
   const link = document.createElement("a");
