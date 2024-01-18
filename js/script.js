@@ -45,6 +45,14 @@ const drawCircle = (e) => {
   contex.arc(previousMouseX, previousMouseY, radius, 0, 2 * Math.PI);
   fillColor.checked ? contex.fill() : contex.stroke();
 };
+const drawTriangle = (e) => {
+  contex.beginPath();
+  contex.moveTo(previousMouseX, previousMouseY);
+  contex.lineTo(e.offsetX, e.offsetY);
+  contex.lineTo(previousMouseX * 2 - e.offsetX, e.offsetY);
+  contex.closePath();
+  fillColor.checked ? contex.fill() : contex.stroke();
+};
 const drawing = (e) => {
   if (!isDrawing) return;
   contex.putImageData(snapshot, 0, 0);
@@ -58,6 +66,9 @@ const drawing = (e) => {
       break;
     case "circle":
       drawCircle(e);
+      break;
+    case "triangle":
+      drawTriangle(e);
       break;
   }
 };
